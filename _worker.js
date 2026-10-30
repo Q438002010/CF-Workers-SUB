@@ -129,8 +129,8 @@ export default {
 			const utf8Decoder = new TextDecoder();
 			const text = utf8Decoder.decode(encodedData);
 
-			//去重
-			const uniqueLines = new Set(text.split('\n'));
+			//去重：按空白拆分并过滤非链接行，保证一行一个链接
+			const uniqueLines = new Set(text.split(/\s+/).filter(x => x.includes('://')));
 			const result = [...uniqueLines].join('\n');
 			//console.log(result);
 			
